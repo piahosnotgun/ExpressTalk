@@ -1,0 +1,24 @@
+{
+  "name": "expresskakao",
+  "version": "1.0.0",
+  "description": "express based kakaotalk client server ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/Del-Los-Leones/ExpressKakao.git"
+  },
+  "author": "dellosleones",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Del-Los-Leones/ExpressKakao/issues"
+  },
+  "homepage": "https://github.com/Del-Los-Leones/ExpressKakao#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "node-kakao": "^4.3.0"
+  }
+}
