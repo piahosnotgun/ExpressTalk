@@ -1,0 +1,28 @@
+body {
+	font-family: 'Noto Sans KR', sans-serif;
+	background: -moz-linear-gradient(0deg, rgba(255, 199, 120, 1) 0%, rgba(255, 255, 0, 1) 100%);
+	background: -webkit-linear-gradient(0deg, rgba(255, 199, 120, 1) 0%, rgba(255, 255, 0, 1) 100%);
+	background: -o-linear-gradient(0deg, rgba(255, 199, 120, 1) 0%, rgba(255, 255, 0, 1) 100%);
+	background: -ms-linear-gradient(0deg, rgba(255, 199, 120, 1) 0%, rgba(255, 255, 0, 1) 100%);
+	background: linear-gradient(90deg, rgba(255, 199, 120, 1) 0%, rgba(255, 255, 0, 1) 100%);
+	color: #1f1f1f;
+}
+hr {
+	background-color: #ffbd00;
+	border: hidden;
+	border-radius: 1px;
+}
+input {
+	border: hidden;
+	border-radius: 2px;
+	background-color: #f2f2f2;
+	padding-left: 10px;
+}
+.short-hr {
+	width: 50px;
+	height: 3px;
+}
+.mid-hr {
+	width: 100px;
+	height: 3px;
+}

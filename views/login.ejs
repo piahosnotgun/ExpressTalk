@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <head>
-	<meta charset='utf-8'>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap"
+		rel="stylesheet"
+	/>
+	<link
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+	/>
+
 	<title>ExpressKakao</title>
-	<link rel="stylesheet" type="text/css" href="css/login.css">
+
+	<link rel="stylesheet" type="text/css" href="css/default.css" />
+	<link rel="stylesheet" type="text/css" href="css/login.css" />
 </head>
 <body>
-	<div class='box'>
-		<p>
-			asdf
-		</p>
+	<div class="box" id="login-box">
+		<h1 id="logo">
+			LOGIN
+		</h1>
+		<hr class="mid-hr" />
+		<input type="text" class="login-input" id="userid" placeholder="이메일" />
+		<input type="password" class="login-input" id="userpwd" placeholder="비밀번호" />
+		<a href='#'>
+			<div class='submit-btn' id='submit'>
+				<i class="fas fa-arrow-right" id='submit-icon'></i>
+			</div>
+		</a>
+		<div class='box-footer'>
+			<p>
+				본 클라이언트는 카카오에서 제공하는 클라이언트가 아닙니다.
+			</p>
+			<p>
+				Github@Del-Los-Leones
+			</p>
+		</div>
 	</div>
 </body>

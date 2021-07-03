@@ -1,12 +1,60 @@
 .box {
-	background-color: #ffab00;
 	border-radius: 15px;
 	border: hidden;
 	margin: 0 auto;
-	height: 40em;
+	height: 500px;
+	width: 350px;
+	-webkit-box-shadow: 5px 5px 13px -1px rgba(0, 0, 0, 0.65);
+	box-shadow: 5px 5px 13px -1px rgba(0, 0, 0, 0.65);
+	overflow: hidden;
+	display: block;
 	text-align: center;
-	width: 20em;
+	background-color: #ffffff;
 }
-#login_box {
-	
+#login-box {
+	margin-top: 70px;
+}
+#logo {
+	font-size: 30px;
+	margin: 50px 20px 2px 20px;
+}
+.login-input {
+	width: 300px;
+	height: 30px;
+}
+#userid {
+	margin-top: 30px;
+}
+#userpwd {
+	margin-top: 4px;
+}
+.submit-btn {
+	background-color: #ffbd00;
+	height: 50px;
+	width: 50px;
+	display: block;
+	margin: 30px auto 0 auto;
+	text-align: center;
+	overflow: hidden;
+	border-radius: 5px;
+	color: #1f1f1f;
+	transition: 0.5s background-color;
+}
+.submit-btn:hover{
+	background-color: #ffffff;
+}
+#submit-icon {
+	margin-top: 16px;
+	text-decoration: none;
+}
+[class^='fa-'],
+[class*=' fa-'] {
+	display: inline-block;
+	width: 100%;
+}
+.box-footer {
+	margin-top: 150px;
+	color: #3b3b3b;
+	text-align: center;
+	font-size: 10px;
 }
