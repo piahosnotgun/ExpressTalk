@@ -11,14 +11,14 @@
 	text-align: center;
 	background-color: #ffffff;
 }
-#login-box {
+#auth-box {
 	margin-top: 70px;
 }
 #logo {
 	font-size: 30px;
 	margin: 50px 20px 2px 20px;
 }
-.login-input {
+.auth-input {
 	width: 300px;
 	height: 30px;
 }
@@ -28,10 +28,8 @@
 #userpwd {
 	margin-top: 4px;
 }
-.submit-btn {
+.btn {
 	background-color: #ffbd00;
-	height: 50px;
-	width: 50px;
 	display: block;
 	margin: 30px auto 0 auto;
 	text-align: center;
@@ -40,8 +38,20 @@
 	color: #1f1f1f;
 	transition: 0.5s background-color;
 }
-.submit-btn:hover{
+.btn:hover{
 	background-color: #ffffff;
+	
+}
+.submit-btn {
+	height: 50px;
+	width: 50px;
+}
+.request-btn {
+	width: 300px;
+	height: 35px;
+	color: #000000;
+	font-size: 15px;
+	line-height: 35px;
 }
 #submit-icon {
 	margin-top: 16px;

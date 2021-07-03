@@ -1,4 +1,5 @@
 let Router = require('./router/router.js');
+let AuthManager = require('./kakao/authmanager.js');
 let express = require('express');
 let app = express();
 var session = require('express-session');
@@ -16,6 +17,9 @@ app.use(session({
 
 let router = new Router(app);
 router.init();
+
+let authManager = new AuthManager();
+authManager.register('test', 'brianlsh425@gmail.com', 'lsh1017!')
 
 let server = app.listen(8080, ()=>{
 	console.log("Express 서버가 시작되었습니다.");
