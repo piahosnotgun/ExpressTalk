@@ -1,3 +1,3 @@
-function requestAuthNumber(){
+function requestPasscode(){
 	
 }

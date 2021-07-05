@@ -1,5 +1,4 @@
 let Router = require('./router/router.js');
-let AuthManager = require('./kakao/authmanager.js');
 let RequestHandler = require('./kakao/requesthandler.js');
 let Database = require('./database.js');
 let express = require('express');
@@ -8,7 +7,7 @@ let session = require('express-session');
 let bodyParser = require('body-parser');
 let readline = require('readline');
 
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/../views');
 app.set('view engine', 'ejs');
 app.set('html', require('ejs').renderFile);
 
