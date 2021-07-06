@@ -1,20 +1,21 @@
 <%-include('header')%>
 <body>
 	<link rel="stylesheet" type="text/css" href="css/auth.css" />
+	<script src="js/script.js"></script>
 	<div class="box" id="auth-box">
-		<h1 id="logo">
-			REGISTER
-		</h1>
-		<hr class="mid-hr" />
-		<input type="text" class="auth-input" id="userid" placeholder="이메일" />
-		<input type="password" class="auth-input" id="userpwd" placeholder="비밀번호" />
-		<input type="text" class="auth-input" id="username" placeholder="닉네임" />
-		<a href='#' onclick='requestPasscode' style='text-decoration: none;'>
-			<div class='btn request-btn' id='submit'>
+		<div id="register-form">
+			<h1 id="logo">
+				REGISTER
+			</h1>
+			<hr class="mid-hr" />
+			<input type="email" class="auth-input" id="useremail" placeholder="이메일" />
+			<input type="password" class="auth-input" id="userpwd" placeholder="비밀번호" />
+			<input type="text" class="auth-input" id="username" placeholder="닉네임" />
+			<button style="text-decoration: none;" class="btn request-btn" id="submit">
 				인증번호 요청
-			</div>
-		</a>
-		<div class='box-footer'>
+			</button>
+		</div>
+		<div class="box-footer">
 			<p>
 				본 클라이언트는 카카오에서 제공하는 클라이언트가 아닙니다.
 			</p>

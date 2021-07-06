@@ -11,15 +11,18 @@ class RequestHandler {
 		this.app.post('/kakao/login', (req, res)=>{
 			let body = req.body;
 			if(typeof body.email === 'undefined' || typeof body.password === 'undefined'){
-				res.json({result: "error"});
+				res.json({result: "error", message: "잘못된 요청입니다."});
 				return;
 			}
 			this.login(body.email, body.password).then((client)=>{
+				if(! client){
+					res.json({result: "error", message: "로그인에 실패했습니다. 아이디나 비밀번호를 다시 한 번 확인해주세요."});
+				}
 				let session = req.session;
 				session.email = body.email;
 				session.isLogin = true;
 				this.clients[body.email] = client;
-				res.json({result: "login success"});
+				res.json({result: "success"});
 				//redirect
 			});
 		});
@@ -27,10 +30,14 @@ class RequestHandler {
 			let session = req.session;
 			let body = req.body;
 			if(typeof body.email === 'undefined' || typeof body.password === 'undefined' || typeof body.name === "undefined"){
-				res.json({result:"error"});
+				res.json({result:"error", message:"잘못된 요청입니다."});
 				return;
 			}
 			this.register(body.name, body.email, body.password).then((api)=>{
+				if(! api){
+					res.json({result: "failed", message:"인증번호 요청에 실패했습니다. 이메일, 비밀번호, 카카오톡이 설치된 기기의 온라인 여부를 확인해주세요."});
+					return;
+				}
 				this.pcRequests[body.email] = api;
 				session.email = body.email;
 				session.password = body.password;
@@ -58,8 +65,13 @@ class RequestHandler {
 			};
 			delete session.password;
 			api.registerDevice(form, body.passcode, true).then(()=> {
-				this.login(form.email, form.password).then(()=>{
-					res.json({result: "login success"});
+				this.login(form.email, form.password).then((client)=>{
+					if(! client){
+						res.json({result: "error", message: "로그인에 실패했습니다. 이메일과 아이디를 다시 한 번 확인해주세요."});
+						return;
+					}
+					this.clients[form.email] = client;
+					res.json({result: "success"});
 				});
 			});
 		});
@@ -79,8 +91,14 @@ class RequestHandler {
 		}
 		let tokenReq = authApiClient.create(name, uuid);
 		let tokenRes = await tokenReq.login(form);
+		if(! tokenRes.success){
+			return false;
+		}
 		let client = new this.api.TalkClient();
 		let loginRes = await client.login(tokenRes.result);
+		if(! loginRes.success){
+			return false;
+		}
 		return client;
 	}
 	async register(name, email, password){
@@ -91,7 +109,11 @@ class RequestHandler {
 		};
 		let uuid = this.api.util.randomWin32DeviceUUID();
 		let api = await this.api.AuthApiClient.create(name, uuid);
-		let passcodeRes = api.requestPasscode(form);
+		let passcodeRes = await api.requestPasscode(form);
+		if(! passcodeRes.success){
+			console.log(passcodeRes.status);
+			return false;
+		}
 		return api;
 	}
 }
