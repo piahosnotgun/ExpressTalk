@@ -1,0 +1,72 @@
+.box {
+	border-radius: 15px;
+	border: hidden;
+	margin: 0 auto;
+	height: 90%;
+	width: 90%;
+	-webkit-box-shadow: 5px 5px 13px -1px rgba(0, 0, 0, 0.65);
+	box-shadow: 5px 5px 13px -1px rgba(0, 0, 0, 0.65);
+	overflow: hidden;
+	display: block;
+	text-align: center;
+	background-color: #ffffff;
+	margin-top: 3%;
+}
+.wrapper {
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+	grid-template-rows: 100%;
+}
+.chatlist {
+	border-right: solid 1px #e3e3e3;
+	display: block;
+	overflow: auto;
+}
+.chat {
+	border-bottom: solid 1px #e3e3e3;
+	height: 50px;
+}
+.chatroom {
+	border: hidden;
+	display: block;
+	overflow: hidden;
+	height: 100%;
+}
+.chatdisplay {
+	height: 90%;
+	overflow: auto;
+	width: 100%;
+	border-bottom: solid 1px #e3e3e3;
+}
+
+.chatarea {
+	height: 10%;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 7fr 1fr;
+	grid-template-rows: 100%;
+}
+
+#chatinput {
+	word-wrap: break-word;
+	height: 50%;
+	width: 95%;
+	margin-left: 0;
+}
+.btn {
+	background-color: #ffbd00;
+	display: block;
+	text-align: center;
+	overflow: hidden;
+	border-radius: 5px;
+	color: #1f1f1f;
+	transition: 0.5s background-color;
+	border: none;
+}
+.btn:hover{
+	background-color: #ffffff;
+}
+#sendchat {
+	height: 50%;
+	width: 95%;
+}

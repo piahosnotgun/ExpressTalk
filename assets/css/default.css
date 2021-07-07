@@ -6,6 +6,11 @@ body {
 	background: -ms-linear-gradient(0deg, rgba(255, 199, 120, 1) 0%, rgba(255, 255, 0, 1) 100%);
 	background: linear-gradient(90deg, rgba(255, 199, 120, 1) 0%, rgba(255, 255, 0, 1) 100%);
 	color: #1f1f1f;
+	height: 100%;
+	overflow: hidden;
+}
+html {
+	height: 100%;
 }
 hr {
 	background-color: #ffbd00;
@@ -25,4 +30,14 @@ input {
 .mid-hr {
 	width: 100px;
 	height: 3px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }

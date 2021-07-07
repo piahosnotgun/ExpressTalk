@@ -2,9 +2,9 @@ window.onload = () => {
 	document.getElementById('submit').onclick = requestPasscode;
 };
 function requestPasscode() {
-	let email = document.getElementById('useremail').innerText;
-	let password = document.getElementById('userpwd').innerText;
-	let name = document.getElementById('username').innerText;
+	let email = document.getElementById('useremail').value;
+	let password = document.getElementById('userpwd').value;
+	let name = document.getElementById('username').value;
 	axios({
 		method: 'post',
 		url: '/kakao/register',
@@ -26,12 +26,44 @@ function requestPasscode() {
 		appendSubmit();
 	});
 }
+function register() {
+	let passcode = document.getElementById('passcode').value.toString();
+	if (! isValidCode(passcode)) {
+		alert('인증번호는 4자리의 숫자여야 합니다.');
+		return;
+	}
+	axios({
+		method: 'post',
+		url: '/kakao/passcode',
+		data: {
+			passcode: passcode
+		}
+	}).then((res)=>{
+		let data = res.data;
+		if(data.result === 'error'){
+			alert(data.message);
+			return;
+		}
+		alert('로그인에 성공했습니다.');
+	})
+}
+function isValidCode(code) {
+	if(code.length !== 4)
+		return false;
+	for (let i = 0; i < code.length; i++) {
+		if (isNaN(parseInt(code[i]))) {
+			return false;
+		}
+	}
+	return true;
+}
 function appendSubmit() {
 	let submit = document.createElement('button');
 	submit.setAttribute('style', 'text-decoration: none;');
 	submit.className = 'btn';
-	submit.id = 'submit-button';
+	submit.id = 'passcode-submit';
 	submit.innerText = '인증번호 확인';
+	submit.onclick = register;
 	document.getElementById('register-form').appendChild(submit);
 }
 function appendInput() {

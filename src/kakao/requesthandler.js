@@ -17,6 +17,7 @@ class RequestHandler {
 			this.login(body.email, body.password).then((client)=>{
 				if(! client){
 					res.json({result: "error", message: "로그인에 실패했습니다. 아이디나 비밀번호를 다시 한 번 확인해주세요."});
+					return;
 				}
 				let session = req.session;
 				session.email = body.email;
@@ -29,7 +30,7 @@ class RequestHandler {
 		this.app.post('/kakao/register', (req, res)=>{
 			let session = req.session;
 			let body = req.body;
-			if(typeof body.email === 'undefined' || typeof body.password === 'undefined' || typeof body.name === "undefined"){
+			if(typeof body.email === 'undefined' || typeof body.password === 'undefined' || typeof body.name === 'undefined'){
 				res.json({result:"error", message:"잘못된 요청입니다."});
 				return;
 			}
@@ -38,11 +39,10 @@ class RequestHandler {
 					res.json({result: "failed", message:"인증번호 요청에 실패했습니다. 이메일, 비밀번호, 카카오톡이 설치된 기기의 온라인 여부를 확인해주세요."});
 					return;
 				}
-				this.pcRequests[body.email] = api;
+				this.pcRequests[body.email] = api; // AuthApiClient
 				session.email = body.email;
 				session.password = body.password;
 				res.json({result:"requestPasscode"});
-				this.db.addData(body.name, body.email, body.password);
 				return;
 			});
 		});
@@ -63,14 +63,21 @@ class RequestHandler {
 				password: session.password,
 				forced: true
 			};
-			delete session.password;
-			api.registerDevice(form, body.passcode, true).then(()=> {
+			api.registerDevice(form, body.passcode, true).then((regRes)=> {
+				if(! regRes.success){
+					console.log(regRes.status);
+					res.json({result: "error", message: "잘못된 인증번호입니다. 인증번호가 만료된 경우 페이지를 새로고침한 후 다시 시도해주세요."});
+					return;
+				}
 				this.login(form.email, form.password).then((client)=>{
 					if(! client){
 						res.json({result: "error", message: "로그인에 실패했습니다. 이메일과 아이디를 다시 한 번 확인해주세요."});
 						return;
 					}
 					this.clients[form.email] = client;
+					let name = api.name;
+					this.db.addData(name, form.email, form.password, api.deviceUUID);
+					delete session.password;
 					res.json({result: "success"});
 				});
 			});
@@ -89,7 +96,7 @@ class RequestHandler {
 		if(! name || ! uuid){
 			return false;
 		}
-		let tokenReq = authApiClient.create(name, uuid);
+		let tokenReq = await authApiClient.create(name, uuid);
 		let tokenRes = await tokenReq.login(form);
 		if(! tokenRes.success){
 			return false;
@@ -111,7 +118,6 @@ class RequestHandler {
 		let api = await this.api.AuthApiClient.create(name, uuid);
 		let passcodeRes = await api.requestPasscode(form);
 		if(! passcodeRes.success){
-			console.log(passcodeRes.status);
 			return false;
 		}
 		return api;
