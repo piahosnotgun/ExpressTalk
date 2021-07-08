@@ -44,8 +44,8 @@ function register() {
 			alert(data.message);
 			return;
 		}
-		alert('로그인에 성공했습니다.');
-	})
+		window.location.href = '/';
+	});
 }
 function isValidCode(code) {
 	if(code.length !== 4)

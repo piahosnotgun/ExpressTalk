@@ -46,16 +46,24 @@
 	grid-template-columns: 7fr 1fr;
 	grid-template-rows: 100%;
 }
-
-#chatinput {
-	word-wrap: break-word;
-	height: 50%;
-	width: 95%;
-	margin-left: 0;
+.inputcontainer {
+	height: 100%;
+	vertical-align: middle;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.btncontainer {
+	height: 100%;
+	vertical-align: middle;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 .btn {
 	background-color: #ffbd00;
-	display: block;
 	text-align: center;
 	overflow: hidden;
 	border-radius: 5px;
@@ -63,10 +71,14 @@
 	transition: 0.5s background-color;
 	border: none;
 }
-.btn:hover{
+.btn:hover {
 	background-color: #ffffff;
 }
-#sendchat {
+#chatinput {
+	width: 90%;
 	height: 50%;
-	width: 95%;
+}
+#sendchat {
+	width: 90%;
+	height: 50%;
 }

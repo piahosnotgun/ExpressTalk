@@ -7,6 +7,9 @@ class RequestHandler {
 		this.clients = {};
 		this.pcRequests = {};
 	}
+	getClient(email){
+		return this.clients[email] ?? false;
+	}
 	init(){
 		this.app.post('/kakao/login', (req, res)=>{
 			let body = req.body;
@@ -23,8 +26,7 @@ class RequestHandler {
 				session.email = body.email;
 				session.isLogin = true;
 				this.clients[body.email] = client;
-				res.json({result: "success"});
-				//redirect
+				res.redirect('/');
 			});
 		});
 		this.app.post('/kakao/register', (req, res)=>{
@@ -69,16 +71,17 @@ class RequestHandler {
 					res.json({result: "error", message: "잘못된 인증번호입니다. 인증번호가 만료된 경우 페이지를 새로고침한 후 다시 시도해주세요."});
 					return;
 				}
+				let name = api.name;
+				this.db.addData(name, form.email, form.password, api.deviceUUID);
 				this.login(form.email, form.password).then((client)=>{
 					if(! client){
 						res.json({result: "error", message: "로그인에 실패했습니다. 이메일과 아이디를 다시 한 번 확인해주세요."});
 						return;
 					}
 					this.clients[form.email] = client;
-					let name = api.name;
-					this.db.addData(name, form.email, form.password, api.deviceUUID);
 					delete session.password;
-					res.json({result: "success"});
+					session.isLogin = true;
+					res.redirect('/');
 				});
 			});
 		});
