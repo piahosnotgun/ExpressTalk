@@ -12,12 +12,14 @@ class RequestHandler {
 	}
 	init(){
 		this.app.post('/kakao/login', (req, res)=>{
+			//로그인
 			let body = req.body;
 			if(typeof body.email === 'undefined' || typeof body.password === 'undefined'){
 				res.json({result: "error", message: "잘못된 요청입니다."});
 				return;
 			}
-			this.login(body.email, body.password).then((client)=>{
+			//로그인 요청
+			this.login(body.email, body.password).then((client)=>{ //TalkClient
 				if(! client){
 					res.json({result: "error", message: "로그인에 실패했습니다. 아이디나 비밀번호를 다시 한 번 확인해주세요."});
 					return;
@@ -29,14 +31,17 @@ class RequestHandler {
 				res.redirect('/');
 			});
 		});
+		
 		this.app.post('/kakao/register', (req, res)=>{
+			//기기등록
 			let session = req.session;
 			let body = req.body;
 			if(typeof body.email === 'undefined' || typeof body.password === 'undefined' || typeof body.name === 'undefined'){
 				res.json({result:"error", message:"잘못된 요청입니다."});
 				return;
 			}
-			this.register(body.name, body.email, body.password).then((api)=>{
+			
+			this.register(body.name, body.email, body.password).then((api)=>{ //AuthApiClient
 				if(! api){
 					res.json({result: "failed", message:"인증번호 요청에 실패했습니다. 이메일, 비밀번호, 카카오톡이 설치된 기기의 온라인 여부를 확인해주세요."});
 					return;
@@ -48,7 +53,9 @@ class RequestHandler {
 				return;
 			});
 		});
+		
 		this.app.post('/kakao/passcode', (req, res)=>{
+			//인증번호 확인
 			let body = req.body;
 			let session = req.session;
 			if(typeof session.email === 'undefined' || typeof session.password === 'undefined'){
@@ -59,7 +66,7 @@ class RequestHandler {
 				res.json({result:"error", message: "no passcode requests has been received"});
 				return;
 			}
-			let api = this.pcRequests[session.email];
+			let api = this.pcRequests[session.email]; // AuthApiClient
 			let form = {
 				email: session.email,
 				password: session.password,
@@ -67,17 +74,18 @@ class RequestHandler {
 			};
 			api.registerDevice(form, body.passcode, true).then((regRes)=> {
 				if(! regRes.success){
-					console.log(regRes.status);
 					res.json({result: "error", message: "잘못된 인증번호입니다. 인증번호가 만료된 경우 페이지를 새로고침한 후 다시 시도해주세요."});
 					return;
 				}
-				let name = api.name;
-				this.db.addData(name, form.email, form.password, api.deviceUUID);
-				this.login(form.email, form.password).then((client)=>{
+				
+				this.db.addData(api.name, form.email, form.password, api.deviceUUID); //DB에 저장
+				
+				this.login(form.email, form.password).then((client)=>{ //TalkClient
 					if(! client){
 						res.json({result: "error", message: "로그인에 실패했습니다. 이메일과 아이디를 다시 한 번 확인해주세요."});
 						return;
 					}
+					
 					this.clients[form.email] = client;
 					delete session.password;
 					session.isLogin = true;
@@ -86,6 +94,7 @@ class RequestHandler {
 			});
 		});
 	}
+	
 	async login(email, password){
 		let form = {
 			email: email,
@@ -111,6 +120,7 @@ class RequestHandler {
 		}
 		return client;
 	}
+	
 	async register(name, email, password){
 		let form = {
 			email: email,
