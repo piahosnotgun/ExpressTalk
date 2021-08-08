@@ -13,7 +13,6 @@ class User {
 			let channel = this.channelList[channelId] ?? false;
 			if (!channel) return;
 			channel.sendChat(msg);
-			console.log(msg);
 		});
 		this.socket.on('request', (data) => {
 			if (data.type === 'channellist') {
@@ -22,14 +21,19 @@ class User {
 		});
 		this.tc.on('chat', (data, channel) => {
 			try {
-				
-			let sender = data.getSenderInfo(channel);
-			let name = sender.nickname;
-			let msg = data.text ?? '(지원되지 않는 메시지 형태입니다)';
-			// this.sendChannelList(this.socket, this.tc);
-			this.channelList = this.getChannelList(this.tc);
-			this.onMessage(this.socket, this.tc, sender, msg, channel.channelId.toString());
-			} catch(e){
+				let sender = data.getSenderInfo(channel);
+				let name = sender.nickname;
+				let msg = data.text ?? '(지원되지 않는 메시지 형태입니다)';
+				// this.sendChannelList(this.socket, this.tc);
+				this.channelList = this.getChannelList(this.tc);
+				this.onMessage(
+					this.socket,
+					this.tc,
+					sender.nickname,
+					msg,
+					channel.channelId.toString()
+				);
+			} catch (e) {
 				console.log(e);
 			}
 		});
