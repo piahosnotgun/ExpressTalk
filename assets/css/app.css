@@ -4,7 +4,7 @@
 	margin: 0 auto;
 	width: 90%;
 	height: 60px;
-	margin-top: 1%;
+	margin-top: 0;
 	overflow: hidden;
 }
 .nav-title {
@@ -48,6 +48,9 @@
 	background-color: #fff;
 	outline: none;
 }
+.chat:focus {
+	background-color: #eeeeee;
+}
 .chatroom {
 	border: hidden;
 	display: block;
@@ -57,7 +60,8 @@
 	height: 90%;
 	width: 100%;
 	border-bottom: solid 1px #e3e3e3;
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .chatarea {
@@ -119,7 +123,8 @@
 	font-size: 15px;
 }
 .message {
-	margin: 1px;
+	margin: 1px 3px;
+	font-size: 13px;
 }
 .balloon {
 	display: block;
@@ -137,7 +142,7 @@
 	position: absolute;
 	width: 0;
 	height: 0;
-	left: -15px;
+	left: -16px;
 	right: auto;
 	top: 0px;
 	bottom: auto;
@@ -152,7 +157,7 @@
 	margin-left: auto;
 }
 .self > .balloon:after {
-	right: -15px;
+	right: -16px;
 	left: auto;
 	border-color: #eeeeee transparent transparent transparent;
 }

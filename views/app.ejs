@@ -5,6 +5,7 @@
 		integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh"
 		crossorigin="anonymous"
 	></script>
+	<script src="/js/chatManager.js"></script>
 	<script src="/js/app.js"></script>
 	<link rel="stylesheet" href="css/app.css" />
 	<div class="appnav">
@@ -19,7 +20,7 @@
 			</div>
 			<div class="chatarea">
 				<div class="inputcontainer">
-					<input id="chatinput" type="text" />
+					<input id="chatinput" type="text" onkeydown='press'/>
 				</div>
 				<div class="btncontainer">
 					<button class="btn" id="sendchat">
