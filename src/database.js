@@ -10,8 +10,8 @@ class Database {
 			this.data = JSON.parse(read);
 		}
 	}
-	addData(name, email, password, uuid) {
-		this.data[email] = { name: name, password: password, uuid: uuid };
+	addData(name, email, uuid) {
+		this.data[email] = { name: name, uuid: uuid };
 	}
 	getData(email, field) {
 		return this.data[email][field] ?? false;

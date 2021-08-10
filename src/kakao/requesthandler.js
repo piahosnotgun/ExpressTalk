@@ -78,7 +78,7 @@ class RequestHandler {
 					return;
 				}
 				
-				this.db.addData(api.name, form.email, form.password, api.deviceUUID); //DB에 저장
+				this.db.addData(api.name, form.email, api.deviceUUID); //DB에 저장
 				
 				this.login(form.email, form.password).then((client)=>{ //TalkClient
 					if(! client){
