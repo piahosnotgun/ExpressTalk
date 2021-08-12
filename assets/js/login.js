@@ -1,8 +1,12 @@
 window.onload = () => {
 	let submit = document.getElementById('submit');
 	submit.onclick = login;
+	let email = document.getElementById('useremail');
+	let pwd = document.getElementById('userpwd');
+	email.onkeydown = press;
+	pwd.onkeydown = press;
 };
-function press(){
+function press(e){
 	if(window.event.keyCode === 13){
 		login();
 	}
