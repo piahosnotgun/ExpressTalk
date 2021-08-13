@@ -1,0 +1,72 @@
+body {
+	margin: 0;
+	background: none;
+}
+button {
+	border: none;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+.container {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.list-container {
+	height: 100%;
+	overflow: auto;
+	width: 300px;
+	background-color: #fff;
+}
+.chatroom-container {
+	height: 100%;
+	width: calc(100vw - 300px);
+	border-left: 1px solid #e6e6e6;
+	background-color: #fff;
+}
+.searchbox {
+	border-radius: 10px;
+	width: 250px;
+	height: 30px;
+}
+.searchbox-container {
+	text-align: center;
+	height: 50px;
+	width: 100%;
+}
+.channel {
+	height: 60px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	border-bottom: 1px solid #e6e6e6;
+}
+.channel > p {
+	width: 100%;
+	text-align: center;
+}
+.channel > button{
+	width: 100%;
+	background: transparent;
+	height: 100%;
+	font-size: 20px;
+}
+.channel.focus {
+	background-color: #e6e6e6;
+	-webkit-box-shadow: inset 0px 0px 7px 2px rgba(0,0,0,0.05); 
+	box-shadow: inset 0px 0px 7px 2px rgba(0,0,0,0.05);
+}
+.logo-container {
+	text-align: center;
+	height: 50px;
+	width: 100%;
+	margin-top: 20px;
+	justify-content: center;
+}
+.logo {
+	font-size: 30px;
+	margin: 0;
+}

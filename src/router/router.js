@@ -14,6 +14,9 @@ class Router {
 				res.render('app');
 			}
 		})
+		this.app.get('/talkview', (req, res) => {
+			res.render('talkview');
+		})
 		this.app.get('/register', (req, res) => {
 			let session = req.session;
 			if (!session.isLogin) {
