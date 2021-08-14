@@ -11,18 +11,15 @@ class Router {
 			if(! session.isLogin) {
 				res.redirect('login');
 			} else {
-				res.render('app');
+				res.render('talkview');
 			}
-		})
-		this.app.get('/talkview', (req, res) => {
-			res.render('talkview');
 		})
 		this.app.get('/register', (req, res) => {
 			let session = req.session;
 			if (!session.isLogin) {
 				res.render('register');
 			} else {
-				res.render('app');
+				res.render('talkview');
 			}
 		});
 		this.app.get('/login', (req, res) => {
@@ -30,7 +27,7 @@ class Router {
 			if (!session.isLogin) {
 				res.render('login');
 			} else {
-				res.render('app');
+				res.render('talkview');
 			}
 		});
 	}

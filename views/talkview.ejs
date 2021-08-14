@@ -5,25 +5,33 @@
 		integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh"
 		crossorigin="anonymous"
 	></script>
+	<script src="/js/chatManager.js"></script>
+	<script src="/js/app.js"></script>
 	<link rel="stylesheet" href="css/talkview.css" />
-	<div class='container'>
-		<div class='list-container' id='channellist'>
-			<div class='logo-container'>
-				<p class='logo'>
-					ExpressTalk
+	<div class="container">
+		<div class="list-container">
+			<div class="logo-container">
+				<p class="logo">Express<b>Talk</b></p>
+			</div>
+			<div class="searchbox-container">
+				<input class="searchbox" />
+			</div>
+			<div id="channellist">
+			</div>
+		</div>
+		<div class="chatroom-container">
+			<div class="chattitle-container">
+				<p id="chattitle">
 				</p>
 			</div>
-			<div class='searchbox-container'>
-				<input class='searchbox'>
+			<div id="chatroom">
 			</div>
-			<p class='channel focus'>
-				<button id='a'>
-					asdf
+			<div class="chatinput-container">
+				<input id="chatinput" />
+				<button id="sendchat">
+					전송
 				</button>
-			</p>
-		</div>
-		<div class='chatroom-container'>
-			
+			</div>
 		</div>
 	</div>
 </body>

@@ -19,7 +19,7 @@ class ChatManager {
 		cm.sendMessage(cm.currentChannel, msg);
 	}
 	changeChannel(channelId) {
-		let chatroom = document.getElementById('chatroomdisplay');
+		let chatroom = document.getElementById('chatroom');
 		chatroom.innerHTML = '';
 		if (
 			typeof this.chatData[channelId] === 'undefined' ||
@@ -38,8 +38,8 @@ class ChatManager {
 		}
 		this.scrollBottom();
 	}
-	scrollBottom(){
-		let chatroom = document.getElementById('chatroomdisplay');
+	scrollBottom() {
+		let chatroom = document.getElementById('chatroom');
 		chatroom.scrollTo(0, chatroom.scrollHeight);
 	}
 	updateChannelList(data) {
@@ -49,23 +49,32 @@ class ChatManager {
 				this.chatData[id] = [];
 			}
 		}
-		let chatListDisplay = document.getElementById('chatlistdisplay');
+		let chatListDisplay = document.getElementById('channellist');
 		chatListDisplay.innerHTML = '';
 		for (let channelId in this.channels) {
 			// UI 업데이트
-			let channel = document.createElement('button');
-			channel.classList.add('chat');
+			let channel = document.createElement('div');
+			channel.classList.add('channel');
+			let profileImage = document.createElement('div');
+			profileImage.classList.add('profile-image');
+			channel.appendChild(profileImage);
+			let button = document.createElement('button');
 			let channelName = document.createTextNode(this.channels[channelId]);
-			channel.id = channelId;
-			channel.appendChild(channelName);
-			channel.onclick = function () {
-				if(cm.currentChannel === this.id)
-					return;
+			button.id = channelId;
+			button.appendChild(channelName);
+			button.onclick = function () {
+				if (cm.currentChannel === this.id) return;
 				cm.currentChannel = this.id;
 				console.log('채널 변경 : ' + cm.currentChannel);
 				cm.changeChannel(this.id);
-				this.focus();
+				document.getElementById('chattitle').innerText = this.channels[channelId];
+				for (let cid in cm.channels) {
+					let cbtn = document.getElementById(cid);
+					if (cbtn.contains('focus')) cbtn.classList.remove('focus');
+				}
+				this.classList.add('focus');
 			};
+			channel.appendChild(button);
 			chatListDisplay.appendChild(channel);
 		}
 	}
@@ -93,7 +102,7 @@ class ChatManager {
 	}
 
 	handleSelfMessage(msg) {
-		let chatroom = document.getElementById('chatroomdisplay');
+		let chatroom = document.getElementById('chatroom');
 		let container = document.createElement('div');
 		container.classList.add('self');
 		let sender = document.createElement('p');
@@ -108,12 +117,12 @@ class ChatManager {
 		container.appendChild(sender);
 		container.appendChild(balloon);
 		chatroom.appendChild(container);
-		
+
 		this.scrollBottom();
 	}
 
 	handleReceivedMessage(sender, msg) {
-		let chatroom = document.getElementById('chatroomdisplay');
+		let chatroom = document.getElementById('chatroom');
 		let container = document.createElement('div');
 		container.classList.add('received');
 		let s = document.createElement('p');
@@ -128,7 +137,7 @@ class ChatManager {
 		container.appendChild(s);
 		container.appendChild(balloon);
 		chatroom.appendChild(container);
-		
+
 		this.scrollBottom();
 	}
 }
