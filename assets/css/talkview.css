@@ -103,7 +103,7 @@ p{
 	height: 100%;
 	font-size: 15px;
 }
-.channel.focus {
+.channel> button.focus {
 	background-color: #e6e6e6;
 	-webkit-box-shadow: inset 0px 0px 7px 2px rgba(0,0,0,0.05); 
 	box-shadow: inset 0px 0px 7px 2px rgba(0,0,0,0.05);
@@ -126,6 +126,7 @@ p{
 	background-image: url('/images/default-profile.svg');
 	background-size: cover;
 	margin-left: 5px;
+	margin-right: 5px;
 	border-radius: 5px;
 }
 

@@ -59,7 +59,12 @@ class ChatManager {
 			profileImage.classList.add('profile-image');
 			channel.appendChild(profileImage);
 			let button = document.createElement('button');
-			let channelName = document.createTextNode(this.channels[channelId]);
+			let cName = this.channels[channelId];
+			if(cName.length > 25){
+				cName = cName.substring(0, 25);
+				cName += "...";
+			}
+			let channelName = document.createTextNode(cName);
 			button.id = channelId;
 			button.appendChild(channelName);
 			button.onclick = function () {
@@ -67,10 +72,10 @@ class ChatManager {
 				cm.currentChannel = this.id;
 				console.log('채널 변경 : ' + cm.currentChannel);
 				cm.changeChannel(this.id);
-				document.getElementById('chattitle').innerText = this.channels[channelId];
+				document.getElementById('chattitle').innerText = cName;
 				for (let cid in cm.channels) {
 					let cbtn = document.getElementById(cid);
-					if (cbtn.contains('focus')) cbtn.classList.remove('focus');
+					if (cbtn.classList.contains('focus')) cbtn.classList.remove('focus');
 				}
 				this.classList.add('focus');
 			};

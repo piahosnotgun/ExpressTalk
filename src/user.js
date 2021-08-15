@@ -75,8 +75,8 @@ class User {
 			let list = [];
 			for (let user of userList) {
 				list.push(user.nickname);
-				channelName = list.join(', ');
 			}
+			channelName = list.join(', ');
 		}
 		return channelName;
 	}
