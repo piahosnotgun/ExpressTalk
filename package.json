@@ -1,6 +1,6 @@
 {
   "name": "expresskakao",
-  "version": "1.0.0",
+  "version": "2.3.0",
   "description": "express based kakaotalk client server ",
   "main": "src/index.js",
   "scripts": {
