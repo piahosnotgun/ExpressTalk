@@ -105,8 +105,8 @@ p{
 }
 .channel> button.focus {
 	background-color: #e6e6e6;
-	-webkit-box-shadow: inset 0px 0px 7px 2px rgba(0,0,0,0.05); 
-	box-shadow: inset 0px 0px 7px 2px rgba(0,0,0,0.05);
+	-webkit-box-shadow: inset 0 0 7px 2px rgba(0,0,0,0.05); 
+	box-shadow: inset 0 0 7px 2px rgba(0,0,0,0.05);
 }
 .logo-container {
 	text-align: center;
@@ -168,10 +168,10 @@ p{
 	height: 0;
 	left: -16px;
 	right: auto;
-	top: 0px;
+	top: 0;
 	bottom: auto;
 	border: 22px solid;
-	border-color: #FAE100 transparent transparent transparent;
+	border-color: #FAE100 transparent transparent;
 }
 .self > .balloon{
 	display: block;
@@ -183,5 +183,5 @@ p{
 .self > .balloon:after {
 	right: -16px;
 	left: auto;
-	border-color: #eeeeee transparent transparent transparent;
+	border-color: #eeeeee transparent transparent;
 }

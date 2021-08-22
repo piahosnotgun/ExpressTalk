@@ -1,8 +1,0 @@
-class Flood {
-	constructor(){
-		
-	}
-	onLoginRequest(){
-		
-	}
-}

@@ -145,10 +145,10 @@
 	height: 0;
 	left: -16px;
 	right: auto;
-	top: 0px;
+	top: 0;
 	bottom: auto;
 	border: 22px solid;
-	border-color: #f9a825 transparent transparent transparent;
+	border-color: #f9a825 transparent transparent;
 }
 .self > .balloon{
 	display: block;
@@ -160,5 +160,5 @@
 .self > .balloon:after {
 	right: -16px;
 	left: auto;
-	border-color: #eeeeee transparent transparent transparent;
+	border-color: #eeeeee transparent transparent;
 }
