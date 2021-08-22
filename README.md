@@ -1,5 +1,7 @@
-﻿![](https://github.com/piahosnotgun/piahosnotgun.github.io/raw/main/images/projects/expresstalk.svg)
-[![CodeFactor](https://www.codefactor.io/repository/github/piahosnotgun/expresstalk/badge)](https://www.codefactor.io/repository/github/piahosnotgun/expresstalk)<font color='gray'>~~*쓰레기*~~</font>[![dependency](https://img.shields.io/badge/node--kakao-4.4.0-blue)](https://github.com/storycraft/node-kakao)
+﻿![ExpressTalk](https://github.com/piahosnotgun/piahosnotgun.github.io/raw/main/images/projects/expresstalk.svg)
+ <br>
+[![CodeFactor](https://www.codefactor.io/repository/github/piahosnotgun/expresstalk/badge)](https://www.codefactor.io/repository/github/piahosnotgun/expresstalk)<font color='gray'>~~*쓰레기*~~</font>
+[![dependency](https://img.shields.io/badge/node--kakao-4.4.0-blue)](https://github.com/storycraft/node-kakao)
 ## How to use?
 ```shell
 $ git clone https://github.com/piahosnotgun/ExpressTalk.git
