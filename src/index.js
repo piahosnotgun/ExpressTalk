@@ -1,7 +1,7 @@
 let Router = require('./router/router.js');
-let RequestHandler = require('./kakao/requesthandler.js');
+let RequestHandler = require('./handler/requesthandler.js');
 let Database = require('./database.js');
-let SocketHandler = require('./kakao/sockethandler.js');
+let SocketHandler = require('./handler/sockethandler.js');
 
 let express = require('express');
 let app = express();

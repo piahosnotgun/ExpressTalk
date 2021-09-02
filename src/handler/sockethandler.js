@@ -1,15 +1,15 @@
-let User = require('../user.js');
+let Client = require('../client.js');
 class SocketHandler {
 	constructor(server, handler){
 		this.server = server;
 		this.handler = handler;
 		this.api = require('node-kakao');
 		console.log("socket.io 리스너가 활성화되었습니다.");
-		this.users = {}; //User[]
+		this.clients = {}; //Client[]
 	}
 	bindListeners(){
-		this.server.on('connection', (client) =>{
-			let session = client.handshake.session;
+		this.server.on('connection', (socket) =>{
+			let session = socket.handshake.session;
 			if(! session.isLogin){
 				return;
 			}
@@ -19,7 +19,7 @@ class SocketHandler {
 				console.log('TalkClient가 제대로 생성되지 않았습니다.');
 				return;
 			}
-			this.users[email] = new User(client, tClient);
+			this.clients[email] = new Client(socket, tClient);
 		});
 	}
 }

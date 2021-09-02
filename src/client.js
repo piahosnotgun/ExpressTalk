@@ -1,12 +1,13 @@
-class User {
+class Client {
 	constructor(socket, tc) {
 		this.socket = socket;
 		this.tc = tc;
 		this.channelList = this.getChannelList(tc);
-		this.bind();
+		this.bindSocket();
+		this.bindTalkClient();
 		this.sendChannelList(socket, tc);
 	}
-	bind() {
+	bindSocket() {
 		this.socket.on('message', (data) => {
 			let msg = data.text;
 			let channelId = data.channelId;
@@ -19,12 +20,14 @@ class User {
 				this.sendChannelList(this.socket, this.tc);
 			}
 		});
+	}
+	bindTalkClient() {
 		this.tc.on('chat', (data, channel) => {
 			try {
 				let sender = data.getSenderInfo(channel);
 				let name = sender.nickname;
 				let msg = data.text ?? '(지원되지 않는 메시지 형태입니다)';
-				if(msg === ''){
+				if (msg === '') {
 					msg = '(지원되지 않는 메시지 형태입니다)';
 				}
 				// this.sendChannelList(this.socket, this.tc);
@@ -47,19 +50,6 @@ class User {
 	sendChannelList(client, tc) {
 		client.emit('data', { type: 'channellist', content: this.getChannelNameList(tc) });
 	}
-	getChannelList(tc) {
-		let channelList = tc.channelList;
-		let it = channelList.all();
-		let result = it.next();
-		let ret = {};
-		while (!result.done) {
-			let channel = result.value;
-			let channelId = channel.channelId.toString();
-			ret[channelId] = channel;
-			result = it.next();
-		}
-		return ret; // string => TalkChannel
-	}
 	getChannelNameList(tc) {
 		let list = this.getChannelList(tc);
 		let ret = {};
@@ -81,4 +71,4 @@ class User {
 		return channelName;
 	}
 }
-module.exports = User;
+module.exports = Client;
