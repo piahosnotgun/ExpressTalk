@@ -19,6 +19,10 @@ class Client {
 			if (data.type === 'channellist') {
 				this.sendChannelList(this.socket, this.tc);
 			}
+			if(data.type === 'roomimage'){
+				let channelId = data.channelId;
+				console.log(this.extractRoomImage(this.channelList[channelId]));
+			}
 		});
 	}
 	bindTalkClient() {
@@ -44,6 +48,25 @@ class Client {
 			}
 		});
 	}
+	extractRoomImage(channel) {
+		let imageUrl = channel.RoomImageURL;
+		console.log(channel);
+		if (!channel.RoomImageURL) {
+			for (let meta in channel.ChannelMetaList) {
+				console.log(meta);
+				if (meta.type === (require('node-kakao')).ChannelMetaType.PROFILE) {
+					const content = JSON.parse(meta.content);
+					imageUrl = content.imageUrl;
+				}
+			}
+
+			if (!imageUrl) {
+				imageUrl = '/images/groupprofile.svg';
+			}
+		}
+
+		return imageUrl;
+	}
 	onMessage(client, tc, sender, msg, channelId) {
 		client.emit('message', { text: msg, sender: sender, channelId: channelId });
 	}
@@ -57,6 +80,19 @@ class Client {
 			ret[channelId] = this.getChannelName(list[channelId]);
 		}
 		return ret; // string => string
+	}
+	getChannelList(tc) {
+		let channelList = tc.channelList;
+		let it = channelList.all();
+		let result = it.next();
+		let ret = {};
+		while (!result.done) {
+			let channel = result.value;
+			let channelId = channel.channelId.toString();
+			ret[channelId] = channel;
+			result = it.next();
+		}
+		return ret; // string => TalkChannel
 	}
 	getChannelName(channel) {
 		let channelName = channel.getDisplayName();

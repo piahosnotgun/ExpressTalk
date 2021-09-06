@@ -14,6 +14,12 @@ function press(e){
 function login(){
 	let email = document.getElementById('useremail').value;
 	let password = document.getElementById('userpwd').value;
+	
+	let submit = document.getElementById('submit');
+	submit.classList.toggle('running');
+
+	document.getElementById('submit-icon').style.display = 'none';
+	document.getElementById('loading').style.display = '';
 	axios({
 		method: 'post',
 		url: '/kakao/login',

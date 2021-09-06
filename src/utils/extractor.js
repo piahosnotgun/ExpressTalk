@@ -28,3 +28,4 @@ class Extractor {
 		return channelName;
 	}
 }
+module.exports = Extractor;
