@@ -19,9 +19,14 @@ p{
 }
 .list-container {
 	height: 100%;
-	overflow: auto;
 	width: 300px;
 	background-color: #fff;
+	overflow: auto;
+}
+.list-header {
+	position: sticky;
+	position: -webkit-sticky;
+	top: 0;
 }
 #channellist {
 	height: (100vh - 100px);

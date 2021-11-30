@@ -11,6 +11,20 @@ class ChatManager {
 		let btn = document.getElementById('sendchat');
 		btn.onclick = this.onSendClick;
 	}
+	searchUpdate(list){
+		this.updateListDisplay(list);
+	}
+	onSearchChannel(keyword) {
+		let ret = {};
+		for(let channelId in this.channels){
+			let channelName = this.channels[channelId];
+			if(typeof(channelName.split(keyword)[1]) !== 'undefined'){
+				ret[channelId] = channelName;
+			}
+		}
+		this.searchUpdate(ret);
+		return ret;
+	}
 	onSendClick() {
 		let msgElement = document.getElementById('chatinput');
 		let msg = msgElement.value;
@@ -49,9 +63,19 @@ class ChatManager {
 				this.chatData[id] = [];
 			}
 		}
+		this.updateListDisplay(data);
+	}
+	reloadListDisplay(){
+		this.updateListDisplay(this.channels);
+	}
+	updateListDisplay(data) {
+		if(data.length === 0){
+			chatListDisplay.innerHTML = '';
+			return;
+		}
 		let chatListDisplay = document.getElementById('channellist');
 		chatListDisplay.innerHTML = '';
-		for (let channelId in this.channels) {
+		for (let channelId in data) {
 			// UI 업데이트
 			let channel = document.createElement('div');
 			channel.classList.add('channel');
@@ -65,9 +89,12 @@ class ChatManager {
 				cName += "...";
 			}
 			let channelName = document.createTextNode(cName);
+			
+			
 			button.id = channelId;
 			button.appendChild(channelName);
-			button.onclick = function () {
+			
+			button.onclick = function () { // 클릭 시 채팅방 변경 바인딩
 				if (cm.currentChannel === this.id) return;
 				cm.currentChannel = this.id;
 				console.log('채널 변경 : ' + cm.currentChannel);
@@ -79,6 +106,7 @@ class ChatManager {
 				}
 				this.classList.add('focus');
 			};
+			
 			channel.appendChild(button);
 			chatListDisplay.appendChild(channel);
 		}

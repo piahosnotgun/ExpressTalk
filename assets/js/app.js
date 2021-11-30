@@ -18,7 +18,16 @@ socket.on('message', (data) => {
 window.onload = () => {
 	cm.bindSendButton();
 	document.getElementById('chatinput').onkeydown = press;
+	document.getElementById('channel-search').oninput = search;
 };
+function search(e){
+	let value = e.target.value;
+	if(value === ''){
+		cm.reloadListDisplay();
+	} else {
+		cm.onSearchChannel(value);
+	}
+}
 function press(e){
 	if(e.keyCode === 13){
 		cm.onSendClick();
