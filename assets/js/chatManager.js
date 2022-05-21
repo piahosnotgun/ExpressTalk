@@ -81,6 +81,7 @@ class ChatManager {
 			channel.classList.add('channel');
 			let profileImage = document.createElement('div');
 			profileImage.classList.add('profile-image');
+			profileImage.id = 'p' + channelId;
 			channel.appendChild(profileImage);
 			let button = document.createElement('button');
 			let cName = this.channels[channelId];
@@ -119,7 +120,10 @@ class ChatManager {
 		if (channelId === this.currentChannel) this.handleReceivedMessage(sender, message);
 	}
 	requestChannelList() {
-		this.socket.emit('request', { type: 'channelList' });
+		this.socket.emit('request', { type: 'channellist' });
+	}
+	requestProfileImage(channelId){
+		this.socket.emit('request', { type: 'roomimage', channelId: channelId})
 	}
 	sendMessage(channelId, msg) {
 		this.socket.emit('message', { text: msg, channelId: channelId });

@@ -7,6 +7,16 @@ socket.on('data', (data) => {
 		let channelList = data.content;
 		cm.updateChannelList(channelList);
 		console.log(channelList);
+		for(let channelId in channelList){
+			cm.requestProfileImage(channelId)
+		}
+	} else if(data.type === 'roomimage'){
+		let channelId = data.channelId;
+		console.log('p' + channelId);
+		let roomImageElement = document.getElementById('p' + channelId);
+		
+		let image = data.content;
+		roomImageElement.style.backgroundImage = "url('" + image + "')";
 	}
 });
 socket.on('message', (data) => {

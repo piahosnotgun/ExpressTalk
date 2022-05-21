@@ -19,9 +19,10 @@ class Client {
 			if (data.type === 'channellist') {
 				this.sendChannelList(this.socket, this.tc);
 			}
-			if(data.type === 'roomimage'){
+			//프로필 이미지 전송
+			if (data.type === 'roomimage') {
 				let channelId = data.channelId;
-				console.log(this.extractRoomImage(this.channelList[channelId]));
+				this.sendChannelImage(this.socket, channelId);
 			}
 		});
 	}
@@ -49,26 +50,28 @@ class Client {
 		});
 	}
 	extractRoomImage(channel) {
-		let imageUrl = channel.RoomImageURL;
-		console.log(channel);
-		if (!channel.RoomImageURL) {
-			for (let meta in channel.ChannelMetaList) {
-				console.log(meta);
-				if (meta.type === (require('node-kakao')).ChannelMetaType.PROFILE) {
-					const content = JSON.parse(meta.content);
-					imageUrl = content.imageUrl;
+		let imageUrl = '/images/default-profile.svg'; // 추후에 업데이트 예정. 그룹 프로필 이미지 고쳐야됨
+		//개인채팅인 경우
+		let userList = channel.info.displayUserList;
+		if (userList.length == 1) {
+			if (typeof imageUrl !== 'undefined') {
+				imageUrl = userList[0].profileURL;
+				if (imageUrl === '' || imageUrl === 'undefined') {
+					imageUrl = '/images/default-profile.svg';
 				}
 			}
-
-			if (!imageUrl) {
-				imageUrl = '/images/groupprofile.svg';
-			}
 		}
-
 		return imageUrl;
 	}
 	onMessage(client, tc, sender, msg, channelId) {
 		client.emit('message', { text: msg, sender: sender, channelId: channelId });
+	}
+	sendChannelImage(client, channelId) {
+		client.emit('data', {
+			type: 'roomimage',
+			content: this.extractRoomImage(this.channelList[channelId]),
+			channelId: channelId,
+		});
 	}
 	sendChannelList(client, tc) {
 		client.emit('data', { type: 'channellist', content: this.getChannelNameList(tc) });
